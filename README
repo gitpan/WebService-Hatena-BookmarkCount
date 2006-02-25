@@ -1,0 +1,45 @@
+NAME
+    WebService::Hatena::BookmarkCount -- Interface for Hatena::Bookmark's
+    getCount XML-RPC API
+
+SYNOPSIS
+        use WebService::Hatena::BookmarkCount;
+        my @list = (
+                "http://www.hatena.ne.jp/info/webservices",
+                "http://www.kawa.net/works/perl/hatena/bookmarkcount.html",
+        );
+        my $hash = WebService::Hatena::BookmarkCount->getCount( @list );
+        foreach my $url ( @list ) {
+            printf( "%5d   %s\n", $hash->{$url}, $url );
+        }
+
+DESCRIPTION
+    WebService::Hatena::BookmarkCount is a interface for "bookmark.getCount"
+    method provided by Hatena::Bookmark XML-RPC API.
+
+METHODS
+  $bgc = WebService::Hatena::BookmarkCount->new();
+    This constructor method creates a instance.
+
+   $hash = $bgc->getCount( @list );
+    This method make a call to "bookmark.getCount" method of the Hatena Web
+    Services. The arguments is list of URLs to get a number of registrations
+    in Hatena::Bookmark. This method returns a reference for a hash, which
+    keys are URLs and which values are counts returned by the Hatena Web
+    Services.
+
+   $hash = WebService::Hatena::BookmarkCount->getCount( @list );
+    You can call this method directly without creating a instance.
+
+MODULE DEPENDENCIES
+    XML::TreePP LWP::UserAgent
+
+AUTHOR
+    Yusuke Kawasaki, <u-suke [at] kawa.net>
+    http://www.kawa.net/works/perl/treepp/treepp-e.html
+
+COPYRIGHT AND LICENSE
+    Copyright (c) 2006 Yusuke Kawasaki. All rights reserved. This program is
+    free software; you can redistribute it and/or modify it under the same
+    terms as Perl itself.
+

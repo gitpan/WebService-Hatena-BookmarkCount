@@ -1,0 +1,13 @@
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         WebService-Hatena-BookmarkCount
+version:      0.04
+version_from: lib/WebService/Hatena/BookmarkCount.pm
+installdirs:  site
+requires:
+    LWP::UserAgent:                0
+    Test::More:                    0
+    XML::TreePP:                   0.03
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.17
