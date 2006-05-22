@@ -1,0 +1,9 @@
+# WebService::Hatena::BookmarkCount Changes
+
+2006/05/21 (0.05)
+    * support more than 50 URLs on a call
+
+2006/02/26 (0.04)
+    * first release.
+
+# http://www.kawa.net/works/perl/hatena/bookmarkcount.html

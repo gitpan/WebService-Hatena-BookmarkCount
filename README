@@ -5,8 +5,8 @@ NAME
 SYNOPSIS
         use WebService::Hatena::BookmarkCount;
         my @list = (
-                "http://www.hatena.ne.jp/info/webservices",
-                "http://www.kawa.net/works/perl/hatena/bookmarkcount.html",
+            "http://www.hatena.ne.jp/info/webservices",
+            "http://www.kawa.net/works/perl/hatena/bookmarkcount.html",
         );
         my $hash = WebService::Hatena::BookmarkCount->getCount( @list );
         foreach my $url ( @list ) {
@@ -14,29 +14,30 @@ SYNOPSIS
         }
 
 DESCRIPTION
-    WebService::Hatena::BookmarkCount is a interface for "bookmark.getCount"
-    method provided by Hatena::Bookmark XML-RPC API.
+    WebService::Hatena::BookmarkCount is a interface for *bookmark.getCount*
+    method which is provided by the Hatena Web Services's XML-RPC API.
 
 METHODS
-  $bgc = WebService::Hatena::BookmarkCount->new();
-    This constructor method creates a instance.
-
-   $hash = $bgc->getCount( @list );
-    This method make a call to "bookmark.getCount" method of the Hatena Web
-    Services. The arguments is list of URLs to get a number of registrations
-    in Hatena::Bookmark. This method returns a reference for a hash, which
-    keys are URLs and which values are counts returned by the Hatena Web
+   $hash = WebService::Hatena::BookmarkCount->getCount( @list );
+    This method makes a *bookmark.getCount* XML-RPC call for the Hatena Web
+    Services. @list is list of URLs to get a number of registrations in
+    Hatena::Bookmark. This method returns a reference for a hash, which keys
+    are URLs and which values are counts returned by the Hatena Web
     Services.
 
-   $hash = WebService::Hatena::BookmarkCount->getCount( @list );
-    You can call this method directly without creating a instance.
-
 MODULE DEPENDENCIES
-    XML::TreePP LWP::UserAgent
+    XML::TreePP
+
+    LWP::UserAgent or HTTP::Lite
+
+SEE ALSO
+    Hatena::Bookmark http://b.hatena.ne.jp/
+
+    Documents in Japanese
+    http://www.kawa.net/works/perl/hatena/bookmarkcount.html
 
 AUTHOR
-    Yusuke Kawasaki, <u-suke [at] kawa.net>
-    http://www.kawa.net/works/perl/treepp/treepp-e.html
+    Yusuke Kawasaki http://www.kawa.net/
 
 COPYRIGHT AND LICENSE
     Copyright (c) 2006 Yusuke Kawasaki. All rights reserved. This program is

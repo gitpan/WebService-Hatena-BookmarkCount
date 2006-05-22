@@ -3,4 +3,9 @@ lib/WebService/Hatena/BookmarkCount.pm
 README
 MANIFEST
 META.yml
-t/webservices.t
+Changes
+make-dist.sh
+t/00_pod.t
+t/01_new.t
+t/02_hatena.t
+t/03_multiple.t
