@@ -17,7 +17,7 @@ diff MANIFEST MANIFEST~ > /dev/null || doit /bin/mv -f MANIFEST~ MANIFEST
 [ -f Makefile ] && doit make clean
 doit perl Makefile.PL
 doit make
-doit make disttest
+MORE_TESTS=1 doit make disttest
 
 main=`grep version_from META.yml | cut -f 2 -d :`
 [ "$main" == "" ] && die "version_from is not found in META.yml"

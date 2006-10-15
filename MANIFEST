@@ -9,3 +9,4 @@ t/00_pod.t
 t/01_new.t
 t/02_hatena.t
 t/03_multiple.t
+t/04_total.t

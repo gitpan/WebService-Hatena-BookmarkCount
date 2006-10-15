@@ -1,32 +1,43 @@
 =head1 NAME
 
-WebService::Hatena::BookmarkCount -- Interface for Hatena::Bookmark's getCount XML-RPC API
+WebService::Hatena::BookmarkCount -- Interface for Hatena::Bookmark's XML-RPC API
 
 =head1 SYNOPSIS
 
     use WebService::Hatena::BookmarkCount;
+
     my @list = (
-        "http://www.hatena.ne.jp/info/webservices",
-        "http://www.kawa.net/works/perl/hatena/bookmarkcount.html",
+        'http://www.hatena.ne.jp/info/webservices',
+        'http://www.kawa.net/works/perl/hatena/bookmarkcount.html',
     );
     my $hash = WebService::Hatena::BookmarkCount->getCount( @list );
     foreach my $url ( @list ) {
         printf( "%5d   %s\n", $hash->{$url}, $url );
     }
 
+    my $top = 'http://japan.cnet.com/';
+    my $total = WebService::Hatena::BookmarkCount->getTotalCount( $top );
+
 =head1 DESCRIPTION
 
-WebService::Hatena::BookmarkCount is a interface for I<bookmark.getCount> 
-method which is provided by the Hatena Web Services's XML-RPC API.
+WebService::Hatena::BookmarkCount is a interface for the Hatena::Bookmark 
+Web Services's XML-RPC API. This provides two methods, I<bookmark.getCount> 
+and I<bookmark.getTotalCount>, to get numbers of count on bookmarks.
 
 =head1 METHODS
 
 =head3 $hash = WebService::Hatena::BookmarkCount->getCount( @list );
 
-This method makes a I<bookmark.getCount> XML-RPC call for the Hatena Web Services. 
-C<@list> is list of URLs to get a number of registrations in Hatena::Bookmark. 
-This method returns a reference for a hash, which keys are URLs and 
-which values are counts returned by the Hatena Web Services.
+This method makes a I<bookmark.getCount> XML-RPC call for the Hatena::Bookmark 
+Web Services. C<@list> is list of URLs to get a number of registrations in 
+Hatena::Bookmark. This method returns a reference for a hash, which keys are 
+URLs and which values are counts returned by the Hatena Web Services.
+
+=head3 $hash = WebService::Hatena::BookmarkCount->getTotalCount( $url );
+
+This method makes a I<bookmark.getTotalCount> XML-RPC call for 
+the Hatena::Bookmark Web Services. C<$url> is the URL to get a number of 
+registrations in Hatena::Bookmark. 
 
 =head1 MODULE DEPENDENCIES
 
@@ -60,7 +71,7 @@ use Carp;
 use XML::TreePP;
 
 use vars qw( $VERSION );
-$VERSION = "0.05";
+$VERSION = "0.06";
 
 my $XMLRPC_URL     = 'http://b.hatena.ne.jp/xmlrpc';
 my $WAIT_SECS      = 1;
@@ -98,7 +109,7 @@ sub getCount {
         my $tree;
         ( $tree, $resxml ) = $tpp->parsehttp( POST => $XMLRPC_URL, $reqxml );
         last unless ref $tree;
-        &parse_response( $tree, $outhash );
+        &parse_res_struct( $tree, $outhash );
         sleep( $sleep++ ) if scalar @$links;    # wait
     }
     $outhash = undef unless scalar keys %$outhash;
@@ -106,7 +117,34 @@ sub getCount {
     wantarray ? ( $outhash, $reqxml, $resxml ) : $outhash;
 }
 
-sub parse_response {
+sub getTotalCount {
+    my $self = shift or return;
+    $self = $self->new() unless ref $self;
+    my $url = shift or return;
+
+    my $reqtree = {
+        methodCall => {
+            methodName => "bookmark.getTotalCount",
+            params => {
+                param => {
+                    value => {
+                        string => $url,
+                    }
+                }
+            }
+        }
+    };
+
+    my $tpp   = $self->{treepp};
+    my $reqxml = $tpp->write($reqtree) or last;
+    my( $tree, $resxml ) = $tpp->parsehttp( POST => $XMLRPC_URL, $reqxml );
+    return unless ref $tree;
+    my $count = &parse_res_simple( $tree );
+
+    wantarray ? ( $count, $reqxml, $resxml ) : $count;
+}
+
+sub parse_res_struct {
     my $tree = shift or return;
     my $hash = shift || {};
     return unless ref $tree;
@@ -129,6 +167,18 @@ sub parse_response {
         $hash->{$name} = $value->{$type};
     }
     $hash;
+}
+
+sub parse_res_simple {
+    my $tree = shift or return;
+    return unless ref $tree;
+    return unless ref $tree->{methodResponse};
+    return unless ref $tree->{methodResponse}->{params};
+    return unless ref $tree->{methodResponse}->{params}->{param};
+    my $param = $tree->{methodResponse}->{params}->{param};
+    return unless ref $param->{value};
+    my $int = $param->{value}->{int};
+    $int;
 }
 
 1;

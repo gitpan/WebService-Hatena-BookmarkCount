@@ -1,9 +1,13 @@
 # WebService::Hatena::BookmarkCount Changes
 
+2006/10/15 (0.06)
+    * supports bookmark.getTotalCount method.
+      http://hatena.g.hatena.ne.jp/hatenabookmark/20061004/1159944160
+
 2006/05/21 (0.05)
-    * support more than 50 URLs on a call
+    * allows more than 50 URLs on a call.
 
 2006/02/26 (0.04)
-    * first release.
+    * first version released.
 
 # http://www.kawa.net/works/perl/hatena/bookmarkcount.html
