@@ -1,9 +1,9 @@
-Makefile.PL
-lib/WebService/Hatena/BookmarkCount.pm
-README
+Changes
 MANIFEST
 META.yml
-Changes
+Makefile.PL
+README
+lib/WebService/Hatena/BookmarkCount.pm
 make-dist.sh
 t/00_pod.t
 t/01_new.t

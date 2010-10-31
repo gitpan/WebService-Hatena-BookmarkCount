@@ -47,7 +47,7 @@ L<LWP::UserAgent> or L<HTTP::Lite>
 
 =head1 SEE ALSO
 
-Hatena::Bookmark
+Hatena Bookmark
 http://b.hatena.ne.jp/
 
 Documents in Japanese
@@ -57,11 +57,18 @@ http://www.kawa.net/works/perl/hatena/bookmarkcount.html
 
 Yusuke Kawasaki http://www.kawa.net/
 
-=head1 COPYRIGHT AND LICENSE
+=head1 COPYRIGHT
 
-Copyright (c) 2006 Yusuke Kawasaki.  All rights reserved.  This program 
-is free software; you can redistribute it and/or modify it under the same
-terms as Perl itself.
+The following copyright notice applies to all the files provided in
+this distribution, including binary files, unless explicitly noted
+otherwise.
+
+Copyright 2006-2010 Yusuke Kawasaki
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
@@ -71,7 +78,7 @@ use Carp;
 use XML::TreePP;
 
 use vars qw( $VERSION );
-$VERSION = "0.06";
+$VERSION = "0.07";
 
 my $XMLRPC_URL     = 'http://b.hatena.ne.jp/xmlrpc';
 my $WAIT_SECS      = 1;

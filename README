@@ -42,7 +42,7 @@ MODULE DEPENDENCIES
     LWP::UserAgent or HTTP::Lite
 
 SEE ALSO
-    Hatena::Bookmark http://b.hatena.ne.jp/
+    Hatena Bookmark http://b.hatena.ne.jp/
 
     Documents in Japanese
     http://www.kawa.net/works/perl/hatena/bookmarkcount.html
@@ -50,8 +50,13 @@ SEE ALSO
 AUTHOR
     Yusuke Kawasaki http://www.kawa.net/
 
-COPYRIGHT AND LICENSE
-    Copyright (c) 2006 Yusuke Kawasaki. All rights reserved. This program is
-    free software; you can redistribute it and/or modify it under the same
-    terms as Perl itself.
+COPYRIGHT
+    The following copyright notice applies to all the files provided in this
+    distribution, including binary files, unless explicitly noted otherwise.
+
+    Copyright 2006-2010 Yusuke Kawasaki
+
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
 
